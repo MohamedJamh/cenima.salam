@@ -3,12 +3,12 @@ The goal of this project is to build a web-based movie theater ticket booking sy
 
 # Administrator:
 
-The administrator should be able to add, update, and delete movies.
-The administrator should be able to add, update, and delete showtimes for movies.
+-The administrator should be able to add, update, and delete movies.
+-The administrator should be able to add, update, and delete showtimes for movies.
   -in case of movie sheduled has changed the client whom booked tickets for it should be notified about the new data & time as well as coupon or discount as Compensation.
-The administrator should be able to add, update, and delete food and beverage items.
-The administrator should be able to view and manage orders placed by clients.
-The administrator should be able to add and update or delete Movie hall.
+-The administrator should be able to add, update, and delete food and beverage items.
+-The administrator should be able to view and manage orders placed by clients.
+-The administrator should be able to add and update or delete Movie hall.
   - A Movie hall is about seats layout ( number , labeling , order ).
 
 # Client:
