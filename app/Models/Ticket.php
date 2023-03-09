@@ -12,4 +12,12 @@ class Ticket extends Model
         'seats',
         'price'
     ];
+
+    public function showtime(){
+        $this->belongsTo(Showtime::class);
+    }
+
+    public function user(){
+        $this->belongsTo(User::class);
+    }
 }

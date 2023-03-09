@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->foreignId('beverage_type_id')->constrained();
             $table->float('price',5,2);
             $table->timestamps();
         });

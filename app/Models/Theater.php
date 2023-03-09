@@ -15,4 +15,8 @@ class Theater extends Model
         'rows_num',
         'seats_num'
     ];
+
+    public function showtimes(){
+        $this->hasMany(Showtime::class);
+    }
 }

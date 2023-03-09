@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('seats');
             $table->float('price',5,2);
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('showtime_id')->constrained();
             $table->timestamps();
         });
     }

@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('showtimes', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->dateTime('date');
             $table->time('starts');
             $table->time('ends');
+            $table->foreignId('movie_id')->constrained();
+            $table->foreignId('theater_id')->constrained();
             $table->timestamps();
         });
     }

@@ -12,4 +12,11 @@ class Movie extends Model
     protected $fillable = [
         'id'
     ];
+
+    public function showtimes(){
+        $this->hasMany(Showtime::class);
+    }
+    public function images(){
+        $this->morphMany(Image::class,'imageable');
+    }
 }

@@ -12,4 +12,8 @@ class BeverageType extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function beverages(){
+        $this->hasMany(Beverage::class);
+    }
 }

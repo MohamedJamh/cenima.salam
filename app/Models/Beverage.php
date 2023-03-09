@@ -14,4 +14,11 @@ class Beverage extends Model
         'description',
         'price'
     ];
+
+    public function type(){
+        $this->belongsTo(BeverageType::class);
+    }
+    public function image(){
+        $this->morphOne(Image::class,'imageable');
+    }
 }
