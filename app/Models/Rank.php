@@ -12,4 +12,7 @@ class Rank extends Model
         'name',
         'price'
     ];
+    public function theaters(){
+        $this->belongsToMany(Theater::class);
+    }
 }

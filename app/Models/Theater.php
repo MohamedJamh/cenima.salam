@@ -19,4 +19,10 @@ class Theater extends Model
     public function showtimes(){
         $this->hasMany(Showtime::class);
     }
+    public function ranks(){
+        $this->belongsToMany(Rank::class);
+    }
+    public function seats(){
+        $this->belongsToMany(Theater::class);
+    }
 }

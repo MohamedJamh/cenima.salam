@@ -41,11 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
     public function tickets(){
         $this->hasMany(Ticket::class);
     }
     public function image(){
         $this->morphOne(Image::class,'imageable');
+    }
+    public function roles(){
+        $this->belongsToMany(Role::class);
     }
 }

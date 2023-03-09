@@ -20,4 +20,7 @@ class Ticket extends Model
     public function user(){
         $this->belongsTo(User::class);
     }
+    public function beverages(){
+        $this->belongsToMany(Beverage::class);
+    }
 }

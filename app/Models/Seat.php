@@ -13,4 +13,9 @@ class Seat extends Model
         'row_label',
         'number'
     ];
+
+    
+    public function theaters(){
+        $this->belongsToMany(Theater::class);
+    }
 }

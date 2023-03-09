@@ -21,4 +21,7 @@ class Beverage extends Model
     public function image(){
         $this->morphOne(Image::class,'imageable');
     }
+    public function tickets(){
+        $this->belongsToMany(Ticket::class);
+    }
 }
