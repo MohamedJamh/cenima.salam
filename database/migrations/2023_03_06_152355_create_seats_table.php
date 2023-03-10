@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->char('row_label',1);
             $table->integer('number');
-            $table->timestamps();
         });
     }
 

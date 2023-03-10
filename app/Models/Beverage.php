@@ -12,7 +12,8 @@ class Beverage extends Model
     protected $fillable = [
         'title',
         'description',
-        'price'
+        'price',
+        'beverage_type_id'
     ];
 
     public function type(){
