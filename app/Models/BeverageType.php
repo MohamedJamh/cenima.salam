@@ -14,6 +14,6 @@ class BeverageType extends Model
     ];
 
     public function beverages(){
-        $this->hasMany(Beverage::class);
+        return $this->hasMany(Beverage::class);
     }
 }

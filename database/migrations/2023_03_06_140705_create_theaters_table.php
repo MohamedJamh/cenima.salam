@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('capacity');
             $table->integer('rows_num');
             $table->integer('seats_num');
+            $table->text('reserved_seats');
             $table->timestamps();
         });
     }

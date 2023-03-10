@@ -17,12 +17,12 @@ class Beverage extends Model
     ];
 
     public function type(){
-        $this->belongsTo(BeverageType::class);
+        return $this->belongsTo(BeverageType::class);
     }
     public function image(){
-        $this->morphOne(Image::class,'imageable');
+        return $this->morphOne(Image::class,'imageable');
     }
     public function tickets(){
-        $this->belongsToMany(Ticket::class);
+        return $this->belongsToMany(Ticket::class);
     }
 }

@@ -16,6 +16,6 @@ class Seat extends Model
 
     
     public function theaters(){
-        $this->belongsToMany(Theater::class);
+        return $this->belongsToMany(Theater::class);
     }
 }

@@ -17,12 +17,12 @@ class Theater extends Model
     ];
 
     public function showtimes(){
-        $this->hasMany(Showtime::class);
+        return $this->hasMany(Showtime::class);
     }
     public function ranks(){
-        $this->belongsToMany(Rank::class);
+        return $this->belongsToMany(Rank::class);
     }
     public function seats(){
-        $this->belongsToMany(Theater::class);
+        return $this->belongsToMany(Theater::class);
     }
 }

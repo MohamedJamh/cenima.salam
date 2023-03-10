@@ -14,13 +14,13 @@ class Ticket extends Model
     ];
 
     public function showtime(){
-        $this->belongsTo(Showtime::class);
+        return $this->belongsTo(Showtime::class);
     }
 
     public function user(){
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
     public function beverages(){
-        $this->belongsToMany(Beverage::class);
+        return $this->belongsToMany(Beverage::class);
     }
 }

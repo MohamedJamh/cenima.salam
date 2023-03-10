@@ -16,6 +16,6 @@ class Image extends Model
     ];
 
     public function imageable(){
-        $this->morphTo();
+        return $this->morphTo();
     }
 }

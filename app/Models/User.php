@@ -42,12 +42,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function tickets(){
-        $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class);
     }
     public function image(){
-        $this->morphOne(Image::class,'imageable');
+        return $this->morphOne(Image::class,'imageable');
     }
     public function roles(){
-        $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class);
+    }
+    public function movies(){
+        return $this->belongsToMany(Movie::class);
     }
 }

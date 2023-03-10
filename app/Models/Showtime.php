@@ -16,12 +16,12 @@ class Showtime extends Model
     ];
 
     public function theater(){
-        $this->belongsTo(Theater::class);
+        return $this->belongsTo(Theater::class);
     }
     public function movie(){
-        $this->belongsTo(Movie::class);
+        return $this->belongsTo(Movie::class);
     }
     public function tickets(){
-        $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class);
     }
 }

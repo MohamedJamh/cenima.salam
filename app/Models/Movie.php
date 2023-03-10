@@ -14,9 +14,13 @@ class Movie extends Model
     ];
 
     public function showtimes(){
-        $this->hasMany(Showtime::class);
+        return $this->hasMany(Showtime::class);
     }
     public function images(){
-        $this->morphMany(Image::class,'imageable');
+        return $this->morphMany(Image::class,'imageable');
+    }
+
+    public function Users(){
+        return $this->belongsToMany(User::class);
     }
 }
