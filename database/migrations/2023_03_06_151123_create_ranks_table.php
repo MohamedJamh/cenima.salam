@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->char('row_label',1);
             $table->float('price',5,2);
-            $table->unique('name');
-            $table->timestamps();
+            $table->unique('row_label');
         });
     }
 

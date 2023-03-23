@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Seat extends Model
+class Schema extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'row_label',
-        'number'
+        'name',
+        'layout_break',
+        'capacity',
+        'per_line'
     ];
 
     
     public function theaters(){
-        return $this->belongsToMany(Theater::class);
+        return $this->hasMany(Theater::class);
     }
 }

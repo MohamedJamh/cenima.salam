@@ -16,10 +16,6 @@ return new class extends Migration
         Schema::create('theaters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('capacity');
-            $table->integer('rows_num');
-            $table->integer('seats_num');
-            $table->text('reserved_seats');
             $table->timestamps();
         });
     }

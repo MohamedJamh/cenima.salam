@@ -9,10 +9,7 @@ class Rank extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'row_label',
         'price'
     ];
-    public function theaters(){
-        return $this->belongsToMany(Theater::class);
-    }
 }
