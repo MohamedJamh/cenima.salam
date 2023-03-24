@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\User;
 use App\Models\Theater;
 use App\Models\Beverage;
 use Illuminate\Database\Seeder;
@@ -17,7 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(1)->unverified()->create();
+        User::factory(1)->unverified()->create();
+        User::factory(1)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

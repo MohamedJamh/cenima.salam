@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
 });
+
+Route::controller(AccountController::class)->group(function(){
+    Route::post('request-password','requestPassword');
+    Route::post('reset-password','resetPassword')->name('password.reset');
+    Route::post('/email/verification-notification','verificationSent');
+    Route::get('/email/verify/{id}/{hash}','verificationVerify')->name('verification.verify');
+});
+
