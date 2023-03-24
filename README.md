@@ -26,10 +26,10 @@ The system will be built using the following technologies:
   - HTML for the frontend structure and layout
   - CSS (using the Tailwind framework) for the frontend styling
   - Javascript ( vanilla | jquery ) for interactivity purposes
-  - ajax , json for data manipulation
+  - VueJs as a frontend framework
   - PHP (using the Laravel framework) for the backend logic and database management
-  - Eloquent (laravel) for backend to database communications
   - MySQL for the database
+  - Rest Api for data exchanging between backoffice and the frontend
 # Design
 The design of the website should be modern and user-friendly. The website should be responsive, meaning it should be easily accessible and usable on devices of different sizes, such as smartphones and tablets.
 # Tools
