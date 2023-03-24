@@ -11,6 +11,7 @@ class Theater extends Model
 
     protected $fillable = [
         'name',
+        'schema_id'
     ];
 
     public function showtimes(){
