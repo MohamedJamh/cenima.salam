@@ -10,7 +10,8 @@ class Movie extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id'
+        'id',
+        'status'
     ];
 
     public function showtimes(){
