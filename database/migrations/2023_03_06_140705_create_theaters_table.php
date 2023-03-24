@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('theaters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('schema_id')->constrained();
             $table->timestamps();
         });
     }
