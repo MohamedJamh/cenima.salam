@@ -50,7 +50,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $user->assignRole('client');
+        // $user->assignRole('client');
         event(new Registered($user));
 
 
@@ -58,7 +58,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
-            'user' => new UserResource($user),
+            // 'user' => new UserResource($user),
             'authorisation' => [
                 'token' => $token,
                 'type' => 'bearer',
@@ -79,7 +79,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user(),
+            'user' => new UserResource(Auth::user()),
             'authorisation' => [
                 'token' => Auth::refresh(),
                 'type' => 'bearer',

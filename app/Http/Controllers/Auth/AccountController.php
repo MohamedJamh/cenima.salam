@@ -17,6 +17,8 @@ class AccountController extends Controller
     public function __construct(){
         $this->middleware('auth:api')->only(['verificationSent','verificationVerify']);
         $this->middleware('guest')->only(['requestPassword','resetPassword']);
+        $this->middleware('throttle:6,1')->only(['verificationSent']);
+        $this->middleware('signed')->only(['verificationVerify']);
     }
     public function requestPassword(DemandeResetPasswordRequest $request){
         $status = Password::sendResetLink(
