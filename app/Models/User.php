@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 // use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable Implements JWTSubject,CanResetPassword,MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable , HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -68,9 +71,6 @@ class User extends Authenticatable Implements JWTSubject,CanResetPassword,MustVe
     }
     public function image(){
         return $this->morphOne(Image::class,'imageable');
-    }
-    public function roles(){
-        return $this->belongsToMany(Role::class);
     }
     public function movies(){
         return $this->belongsToMany(Movie::class);
