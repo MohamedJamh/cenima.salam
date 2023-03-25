@@ -50,7 +50,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        // $user->assignRole('client');
+        $user->assignRole('client');
         event(new Registered($user));
 
 

@@ -21,13 +21,13 @@ class UserResource extends JsonResource
             "email" => $this->email,
             "createdAt" => date_format($this->created_at, 'Y-m-d H:i:s')
         ];
-        // if(Auth::user()->hasRole('admin')){
-        //     $roles = array();
-        //     foreach ($this->roles as $role) {
-        //         array_push($roles,$role->name);
-        //     }
-        //     $user['roles'] = $roles;
-        // }
+        if(Auth::user()->hasRole('admin')){
+            $roles = array();
+            foreach ($this->roles as $role) {
+                array_push($roles,$role->name);
+            }
+            $user['roles'] = $roles;
+        }
         return $user;
     }
 }
