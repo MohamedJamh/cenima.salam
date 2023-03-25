@@ -185,7 +185,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        //spatie
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
          */

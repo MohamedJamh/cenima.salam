@@ -18,8 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(1)->unverified()->create();
-        User::factory(1)->create();
+        
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -27,11 +26,22 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
-        $this->call(RankSeeder::class);
-        $this->call(SchemaSeeder::class);
+        $this->call([
+            RankSeeder::class,
+            SchemaSeeder::class,
+            BeverageTypeSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class
+        ]);
         Theater::factory(3)->create();
-        $this->call(BeverageTypeSeeder::class);
         Beverage::factory(3)->create();
+
+        User::factory(1)->unverified()->create()->each(function($user){
+            $user->assignRole('client');
+        });
+        User::factory(1)->create()->each(function($user){
+            $user->assignRole('client');
+        });
 
         // $movie_ids = Movie::pluck('id');
         // User::factory(2)
