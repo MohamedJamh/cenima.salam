@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RoleSeeder extends Seeder
 {
@@ -15,14 +15,48 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        //
-        $roles = [
-            ['name' => 'admin'],
-            ['name' => 'client']
-        ];
+        $admin = Role::create([
+            'name' => 'admin',
+        ]);
+        $admin->syncPermissions([
+            'show movies',
+            'add movies',
+            'delete movies',
 
-        foreach ($roles as $role) {
-            Role::create($role);
-        }
+            'show beverages',
+            'add beverages',
+            'edit beverages',
+            'delete beverages',
+
+            'show theaters',
+            'add theaters',
+            'edit theaters',
+            'delete theaters',
+
+            'show showtimes',
+            'add showtimes',
+            'edit showtimes',
+            'delete showtimes',
+
+            'show all tickets',
+        ]);
+        $client = Role::create([
+            'name' => 'client',
+        ]);
+        $client->syncPermissions([
+            'show movies',
+            'add favorit movie',
+            'delete favorit movie',
+
+            'show beverages',
+            'order beverages',
+
+            'show theaters',
+
+            'show showtimes',
+
+            'show reserved tickets',
+            'cancel tickets'
+        ]);
     }
 }
