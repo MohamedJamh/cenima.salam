@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('showtimes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->dateTime('date');
+            $table->date('date');
             $table->time('starts');
             $table->time('ends');
             $table->foreignId('movie_id')->constrained();

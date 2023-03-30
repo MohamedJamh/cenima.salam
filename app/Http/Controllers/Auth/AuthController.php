@@ -26,15 +26,15 @@ class AuthController extends Controller
         $token = Auth::attempt($credentials);
         if (!$token) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message' => 'Unauthorized',
-            ], 401);
+            ]);
         }
 
 
         $user = Auth::user();
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'user' => new UserResource($user),
             'authorisation' => [
                 'token' => $token,
@@ -56,7 +56,7 @@ class AuthController extends Controller
 
         $token = Auth::login($user);
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'User created successfully',
             // 'user' => new UserResource($user),
             'authorisation' => [
@@ -70,7 +70,7 @@ class AuthController extends Controller
     {
         Auth::logout();
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'Successfully logged out',
         ]);
     }
@@ -78,7 +78,7 @@ class AuthController extends Controller
     public function refresh()
     {
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'user' => new UserResource(Auth::user()),
             'authorisation' => [
                 'token' => Auth::refresh(),

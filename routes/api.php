@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Movie\MovieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
@@ -30,3 +31,10 @@ Route::controller(AccountController::class)->group(function(){
     Route::get('/email/verify/{id}/{hash}','verificationVerify')->name('verification.verify');
 });
 
+Route::controller(MovieController::class)->group(function(){
+    Route::prefix('movie')->group(function(){
+        Route::get('','popularMovie');
+        Route::get('/upcoming','upcomingMovies');
+        Route::get('/premier','premierMovies');
+    });
+});
