@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->string('url');
-            $table->string('imageable_id');
-            $table->string('imageable_type');
-            $table->enum('type',['profile','poster','backdrop']);
+        Schema::create('production_companies', function (Blueprint $table) {
+            $table->unsignedBigInteger('id')->primary();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('production_companies');
     }
 };

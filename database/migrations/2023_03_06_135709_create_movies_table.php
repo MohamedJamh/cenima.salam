@@ -15,7 +15,15 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->enum('status', ['upcoming', 'premier']);
+            $table->string('title');
+            $table->text('tagline');
+            $table->text('overview');
+            $table->bigInteger('budget');
+            $table->string('language');
+            $table->date('release_date');
+            $table->integer('runtime');
+            $table->float('rate',2,1);
+            $table->enum('status', ['upcoming', 'premier'])->nullable();
             $table->timestamps();
         });
     }

@@ -38,3 +38,7 @@ Route::controller(MovieController::class)->group(function(){
         Route::get('/premier','premierMovies');
     });
 });
+
+Route::get('/debug', function(){
+    //debug your code here
+});

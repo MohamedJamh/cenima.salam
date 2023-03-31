@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rank extends Model
+class ProductionCompany extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'name',
-        'row_label',
-        'price'
     ];
+    public function movies(){
+        return $this->belongsToMany(Movie::class);
+    }
 }

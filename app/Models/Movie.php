@@ -11,16 +11,29 @@ class Movie extends Model
 
     protected $fillable = [
         'id',
+        'title',
+        'tag_line',
+        'budget',
+        'language',
+        'overview',
+        'release_date',
+        'runtime',
+        'rate',
         'status'
     ];
 
+    public function genres(){
+        return $this->belongsToMany(Genre::class);
+    }
+    public function productionCompanies(){
+        return $this->belongsToMany(ProductionCompany::class);
+    }
     public function showtimes(){
         return $this->hasMany(Showtime::class);
     }
     public function images(){
         return $this->morphMany(Image::class,'imageable');
     }
-
     public function Users(){
         return $this->belongsToMany(User::class);
     }

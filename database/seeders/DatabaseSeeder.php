@@ -27,23 +27,24 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            RankSeeder::class,
-            SchemaSeeder::class,
-            BeverageTypeSeeder::class,
-            PermissionSeeder::class,
-            RoleSeeder::class
+            // RankSeeder::class,
+            // SchemaSeeder::class,
+            // BeverageTypeSeeder::class,
+            // PermissionSeeder::class,
+            // RoleSeeder::class,
+            // GenreSeeder::class,
+            MovieSeeder::class
         ]);
-        Theater::factory(3)->create();
-        Beverage::factory(3)->create();
+        // Theater::factory(3)->create();
+        // Beverage::factory(3)->create();
 
-        User::factory(1)->unverified()->create()->each(function($user){
-            $user->assignRole('client');
-        });
-        User::factory(1)->create()->each(function($user){
-            $user->assignRole('client');
-        });
+        // User::factory(1)->unverified()->create()->each(function($user){
+        //     $user->assignRole('client');
+        // });
+        // User::factory(1)->create()->each(function($user){
+        //     $user->assignRole('client');
+        // });
 
-        // $movie_ids = Movie::pluck('id');
         // User::factory(2)
         // ->create()
         // ->each(function ($user) use ($movie_ids){
