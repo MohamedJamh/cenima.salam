@@ -20,11 +20,13 @@ class MovieSeeder extends Seeder
     {
         // add your tmdb api key to env file under the name of TMDB_TOKEN
         $count = 0;
-        $popular_movies = Http::tmdb()->connectTimeout(0)->get('/movie/popular')->json()['results'];
+        $popular_movies = Http::tmdb()
+        ->get('/movie/popular')->json()['results'];
         $movie_ids = array_column($popular_movies,'id');
 
         foreach ($movie_ids as $movie_id) {
-            $movie = Http::tmdb()->connectTimeout(0)->get('/movie/'.$movie_id)->json();
+            $movie = Http::tmdb()
+            ->get('/movie/'.$movie_id)->json();
             $movie_record = Movie::find($movie['id']);
             if(!$movie_record){
                 Movie::create([
