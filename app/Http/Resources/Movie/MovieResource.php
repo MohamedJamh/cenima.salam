@@ -16,7 +16,27 @@ class MovieResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'status' => $this->status
+            'title' => $this->title,
+            'tagline' => $this->tagline,
+            'budget' => $this->budget,
+            'language' => $this->language,
+            'overview' => $this->overview,
+            'release_date' => $this->release_date,
+            'runtime' => $this->runtime,
+            'rate' => $this->rate,
+            'status' => $this->status,
+            'genres' => $this->genres->map(function ($genre) {
+                return $genre->name;
+            }),
+            'production_companies' => $this->productionCompanies->map(function ($company) {
+                return $company->name;
+            }),
+            'images' => $this->images->map(function ($image) {
+                return [
+                    'url' => $image->url,
+                    'type' => $image->type
+                ];
+            }),
         ];
     }
 }

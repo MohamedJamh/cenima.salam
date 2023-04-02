@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\Http;
 class MovieController extends Controller
 {
     public function popularMovie(){
-        $popularMovies = Http::tmdb()->get('/movie/popular')->json()['results'];
+        $popularMovies = Movie::with(['genres','productionCompanies','images'])->get();
+        
         return response()->json([
             'status' => true,
-            'result' => $popularMovies
+            'result' => new MovieCollection($popularMovies)
         ]);
     }
     public function upcomingMovies(){
-        $upcomingMovies = Movie::where('status','upcoming')->get();
+        $upcomingMovies = Movie::with(['genres','productionCompanies','images'])
+        ->where('status','upcoming')->get();
         return response()->json([
             'status' => true,
             'result' => new MovieCollection($upcomingMovies)

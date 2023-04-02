@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\Movie\MovieController;
+use App\Models\Movie;
 use Illuminate\Http\Request;
+use App\Models\ProductionCompany;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Movie\MovieController;
 use App\Http\Controllers\Auth\AccountController;
 
 /*
@@ -37,4 +40,10 @@ Route::controller(MovieController::class)->group(function(){
         Route::get('/upcoming','upcomingMovies');
         Route::get('/premier','premierMovies');
     });
+});
+
+Route::get('/debug', function(){
+    //debug your code here
+    
+
 });

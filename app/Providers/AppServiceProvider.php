@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Http::macro('tmdb', function () {
             return Http::withToken(config('services.tmdb.token'))
+            ->withOptions(['verify' => false])
             ->baseUrl('https://api.themoviedb.org/3');
         });
     }
