@@ -45,7 +45,7 @@ class MovieSeeder extends Seeder
             $genres = array_column($movie['genres'] , 'id');
             $production_companies = array_column($movie['production_companies'] , 'id');
             
-            $movie_record->genres()->attach($genres);
+            // $movie_record->genres()->attach($genres);
             $movie_record->productionCompanies()->attach($production_companies);
 
             $count++;
