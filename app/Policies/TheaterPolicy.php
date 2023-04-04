@@ -4,7 +4,9 @@ namespace App\Policies;
 
 use App\Models\Theater;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class TheaterPolicy
 {
@@ -44,11 +46,12 @@ class TheaterPolicy
     public function update(User $user, Theater $theater)
     {
         if($theater->showtimes()->exists()){
-            return response()->json([
+            throw new HttpResponseException(response()->json([
                 'status' => false,
-                'message' => 'Theater has Showtimes at the moment ,Can\'t update details'
-            ]);
+                'message' => 'The theater is in use , Can\'t update details'
+            ]));
         }
+        return true;
     }
 
     /**
@@ -57,7 +60,13 @@ class TheaterPolicy
      */
     public function delete(User $user, Theater $theater)
     {
-        //
+        if($theater->showtimes()->exists()){
+            throw new HttpResponseException(response()->json([
+                'status' => false,
+                'message' => 'The theater is in use , Can\'t delete theater'
+            ]));
+        }
+        return true;
     }
 
     /**

@@ -58,8 +58,13 @@ class TheaterController extends Controller
 
     
     
-    public function destroy($id)
+    public function destroy(Theater $theater)
     {
-        //
+        $this->authorize('delete',$theater);
+        $theater->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Theater details has been delelted succesfully'
+        ]);
     }
 }
