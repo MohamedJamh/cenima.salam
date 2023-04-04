@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Beverage\BeverageController;
 use App\Http\Controllers\BeverageType\BeverageTypeController;
+use App\Http\Controllers\Genre\GenreController;
 use App\Http\Controllers\Schema\SchemaController;
 use App\Http\Controllers\Theater\TheaterController;
 use App\Models\Movie;
@@ -53,6 +54,7 @@ Route::controller(SchemaController::class)->group(function(){
     });
 });
 
+Route::apiResource('/genre',GenreController::class);
 Route::apiResource('/theater',TheaterController::class);
 Route::apiResource('/beverage',BeverageController::class);
 Route::apiResource('/beverage-type',BeverageTypeController::class);
