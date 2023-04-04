@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources\BeverageType;
+namespace App\Http\Resources\Theater;
 
-use App\Http\Resources\Beverage\BeverageCollection;
-use App\Http\Resources\Beverage\BeverageResource;
+use App\Http\Resources\Schema\SchemaCollection;
+use App\Http\Resources\Schema\SchemaResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class beverageTypeResource extends JsonResource
+class TheaterResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +19,10 @@ class beverageTypeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'beverage' => $this->whenLoaded('beverages', function () {
-                return new BeverageCollection($this->beverages) ;
+            'schema' => $this->whenLoaded('schema',function(){
+                return new SchemaResource($this->schema);
             })
+
         ];
     }
 }

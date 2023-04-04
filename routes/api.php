@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Beverage\BeverageController;
 use App\Http\Controllers\BeverageType\BeverageTypeController;
+use App\Http\Controllers\Schema\SchemaController;
+use App\Http\Controllers\Theater\TheaterController;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Models\ProductionCompany;
@@ -44,11 +46,17 @@ Route::controller(HomeController::class)->group(function(){
     });
 });
 
+Route::controller(SchemaController::class)->group(function(){
+    Route::prefix('schema')->group(function(){
+        Route::get('','index');
+        Route::get('/{schema}','show');
+    });
+});
+
+Route::apiResource('/theater',TheaterController::class);
 Route::apiResource('/beverage',BeverageController::class);
 Route::apiResource('/beverage-type',BeverageTypeController::class);
 
 Route::get('/debug', function(){
     //debug your code here
-    
-
 });
