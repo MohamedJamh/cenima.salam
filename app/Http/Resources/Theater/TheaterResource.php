@@ -4,6 +4,7 @@ namespace App\Http\Resources\Theater;
 
 use App\Http\Resources\Schema\SchemaCollection;
 use App\Http\Resources\Schema\SchemaResource;
+use App\Http\Resources\Showtime\ShowtimeCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TheaterResource extends JsonResource
@@ -21,8 +22,10 @@ class TheaterResource extends JsonResource
             'name' => $this->name,
             'schema' => $this->whenLoaded('schema',function(){
                 return new SchemaResource($this->schema);
+            }),
+            'showtimes' => $this->whenLoaded('showtimes',function(){
+                return new ShowtimeCollection($this->showtimes);
             })
-
         ];
     }
 }
