@@ -16,7 +16,7 @@ class Beverage extends Model
         'beverage_type_id'
     ];
 
-    public function type(){
+    public function beverageType(){
         return $this->belongsTo(BeverageType::class);
     }
     public function image(){

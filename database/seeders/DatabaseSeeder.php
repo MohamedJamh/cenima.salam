@@ -38,6 +38,9 @@ class DatabaseSeeder extends Seeder
         // Theater::factory(3)->create();
         // Beverage::factory(3)->create();
 
+        // User::factory(1)->create()->each(function($user){
+        //     $user->assignRole('admin');
+        // });
         // User::factory(1)->unverified()->create()->each(function($user){
         //     $user->assignRole('client');
         // });
