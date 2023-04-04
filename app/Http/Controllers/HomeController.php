@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Movie;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Movie\MovieCollection;
 use App\Http\Resources\Showtime\ShowtimeCollection;
 use App\Models\Movie;
@@ -10,10 +9,11 @@ use App\Models\Showtime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class MovieController extends Controller
+class HomeController extends Controller
 {
     public function popularMovie(){
-        $popularMovies = Movie::with(['genres','productionCompanies','images'])->get();
+        $popularMovies = Movie::with(['genres','productionCompanies','images'])
+        ->where('status',null)->get();
         
         return response()->json([
             'status' => true,
@@ -29,10 +29,10 @@ class MovieController extends Controller
         ]);
     }
     public function premierMovies(){
-        $premierMovies = Showtime::where('date','>=',date('Y-m-d'))->get();
+        $premierMovies = Movie::where('status','premier')->get();
         return response()->json([
             'status' => true,
-            'result' => new ShowtimeCollection($premierMovies)
+            'result' => new MovieCollection($premierMovies)
         ]);
     }
 }
