@@ -19,7 +19,6 @@ class GenreSeeder extends Seeder
         $genres = Http::tmdb()->get('/genre/movie/list')->json()['genres'];
         foreach ($genres as $genre) {
             Genre::firstOrCreate([
-                'id' => $genre['id'],
                 'name' => $genre['name']
             ]);
         }

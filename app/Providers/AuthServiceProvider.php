@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Genre;
 use App\Models\Theater;
+use App\Policies\GenrePolicy;
 use App\Policies\TheaterPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -16,7 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Theater::class => TheaterPolicy::class
+        Theater::class => TheaterPolicy::class,
+        Genre::class => GenrePolicy::class,
     ];
 
     /**

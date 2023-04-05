@@ -26,12 +26,12 @@ class GenreController extends Controller
     
     public function store(GenreRequest $request)
     {
-        // $genre = Genre::create($request->all());
-        // return response()->json([
-        //     'status' => true,
-        //     'message' => 'Genre Added succesfully',
-        //     'result' => new GenreResource($genre)
-        // ]);
+        $genre = Genre::create($request->all());
+        return response()->json([
+            'status' => true,
+            'message' => 'Genre Added succesfully',
+            'result' => new GenreResource($genre)
+        ]);
     }
 
     
@@ -58,10 +58,12 @@ class GenreController extends Controller
     
     public function destroy(Genre $genre)
     {
-        // $genre->delete();
-        // return response()->json([
-        //     'status' => true,
-        //     'message' => 'Genre deleted succesfully'
-        // ]);
+        $this->authorize('delete',$genre);
+        
+        $genre->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Genre deleted succesfully'
+        ]);
     }
 }

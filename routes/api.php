@@ -3,8 +3,11 @@
 use App\Http\Controllers\Beverage\BeverageController;
 use App\Http\Controllers\BeverageType\BeverageTypeController;
 use App\Http\Controllers\Genre\GenreController;
+use App\Http\Controllers\Movie\MovieController;
 use App\Http\Controllers\Schema\SchemaController;
 use App\Http\Controllers\Theater\TheaterController;
+use App\Models\Genre;
+use App\Models\Image;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Models\ProductionCompany;
@@ -40,10 +43,10 @@ Route::controller(AccountController::class)->group(function(){
 });
 
 Route::controller(HomeController::class)->group(function(){
-    Route::prefix('movie')->group(function(){
-        Route::get('','popularMovie');
-        Route::get('/upcoming','upcomingMovies');
-        Route::get('/premier','premierMovies');
+    Route::prefix('home')->group(function(){
+        Route::get('/popularMovie','popularMovie');
+        Route::get('/upcomingMovie','upcomingMovies');
+        Route::get('/premierMovie','premierMovies');
     });
 });
 
@@ -55,10 +58,12 @@ Route::controller(SchemaController::class)->group(function(){
 });
 
 Route::apiResource('/genre',GenreController::class);
+Route::apiResource('/movie',MovieController::class);
 Route::apiResource('/theater',TheaterController::class);
 Route::apiResource('/beverage',BeverageController::class);
 Route::apiResource('/beverage-type',BeverageTypeController::class);
 
 Route::get('/debug', function(){
     //debug your code here
+    
 });

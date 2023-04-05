@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('movies', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
-            $table->string('title');
+            $table->id();
+            $table->string('title')->unique();
             $table->text('tagline');
             $table->text('overview');
             $table->bigInteger('budget');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('release_date');
             $table->integer('runtime');
             $table->float('rate',2,1);
-            $table->enum('status', ['upcoming', 'premier'])->nullable();
+            $table->enum('status', ['popular','upcoming', 'premier'])->nullable();
             $table->timestamps();
         });
     }
