@@ -5,6 +5,7 @@ use App\Http\Controllers\BeverageType\BeverageTypeController;
 use App\Http\Controllers\Genre\GenreController;
 use App\Http\Controllers\Movie\MovieController;
 use App\Http\Controllers\Movie\MovieTrashController;
+use App\Http\Controllers\Rank\RankController;
 use App\Http\Controllers\Schema\SchemaController;
 use App\Http\Controllers\Theater\TheaterController;
 use App\Models\Genre;
@@ -71,6 +72,8 @@ Route::apiResource('/movies',MovieController::class);
 Route::apiResource('/theaters',TheaterController::class);
 Route::apiResource('/beverages',BeverageController::class);
 Route::apiResource('/beverage-types',BeverageTypeController::class);
+
+Route::get('ranks',[RankController::class,'index']);
 
 Route::get('/debug', function(){
     //debug your code here
