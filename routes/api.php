@@ -4,6 +4,7 @@ use App\Http\Controllers\Beverage\BeverageController;
 use App\Http\Controllers\BeverageType\BeverageTypeController;
 use App\Http\Controllers\Genre\GenreController;
 use App\Http\Controllers\Movie\MovieController;
+use App\Http\Controllers\Movie\MovieTrashController;
 use App\Http\Controllers\Schema\SchemaController;
 use App\Http\Controllers\Theater\TheaterController;
 use App\Models\Genre;
@@ -55,6 +56,12 @@ Route::controller(SchemaController::class)->group(function(){
         Route::get('','index');
         Route::get('/{schema}','show');
     });
+});
+
+Route::prefix('movie')->group(function(){
+    Route::get('/trash',[MovieTrashController::class,'trash']);
+    Route::get('/trash/{movie}/restore',[MovieTrashController::class,'restoreMovie']);
+    Route::get('/trash/{movie}/force-delete',[MovieTrashController::class,'forceDelete']);
 });
 
 Route::apiResource('/genre',GenreController::class);
