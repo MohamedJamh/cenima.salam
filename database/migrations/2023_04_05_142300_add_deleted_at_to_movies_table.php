@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('production_companies', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('movies', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('production_companies');
+        Schema::table('movies', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

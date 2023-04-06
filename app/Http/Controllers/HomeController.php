@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function popularMovie(){
         $popularMovies = Movie::with(['genres','productionCompanies','images'])
-        ->where('status',null)->get();
+        ->where('status','popular')->get();
         
         return response()->json([
             'status' => true,

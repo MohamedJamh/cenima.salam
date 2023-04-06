@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\BeverageType;
 
+use App\Http\Resources\Beverage\BeverageCollection;
 use App\Http\Resources\Beverage\BeverageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class beverageTypeResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'beverage' => $this->whenLoaded('beverages', function () {
-                return $this->beverages;
+                return new BeverageCollection($this->beverages) ;
             })
         ];
     }
