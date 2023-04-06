@@ -73,6 +73,8 @@ class MovieController extends Controller
     
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
+        $this->authorize('update',$movie);
+
         $movie->update($request->all());
         return response()->json([
             'status' => true,
@@ -84,6 +86,8 @@ class MovieController extends Controller
   
     public function destroy(Movie $movie)
     {
+        $this->authorize('delete',$movie);
+
         $movie->delete();
         return response()->json([
             'status' => true,

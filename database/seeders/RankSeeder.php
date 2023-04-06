@@ -19,7 +19,7 @@ class RankSeeder extends Seeder
         //
         $ranks = [
             ['row_label' => 'ABC' ,'name' => 'classic', 'price' => 100.00],
-            ['row_label' => 'DEF' ,'name' => 'premium', 'price' => 150.00],
+            ['row_label' => 'DE' ,'name' => 'premium', 'price' => 150.00],
         ];
 
         foreach ($ranks as $rank) {

@@ -52,23 +52,25 @@ Route::controller(HomeController::class)->group(function(){
 });
 
 Route::controller(SchemaController::class)->group(function(){
-    Route::prefix('schema')->group(function(){
+    Route::prefix('schemas')->group(function(){
         Route::get('','index');
         Route::get('/{schema}','show');
     });
 });
 
-Route::prefix('movie')->group(function(){
-    Route::get('/trash',[MovieTrashController::class,'trash']);
-    Route::get('/trash/{movie}/restore',[MovieTrashController::class,'restoreMovie']);
-    Route::get('/trash/{movie}/force-delete',[MovieTrashController::class,'forceDelete']);
+Route::prefix('movies/trashed')->group(function(){
+    Route::get('',[MovieTrashController::class,'trash']);
+    Route::get('/{movie}/restore',[MovieTrashController::class,'restoreMovie']);
+    Route::get('/{movie}/delete',[MovieTrashController::class,'forceDeleteMovie']);
+    Route::get('/restore',[MovieTrashController::class,'restoreAllTrash']);
+    Route::get('/delete',[MovieTrashController::class,'forceDeleteAllTrash']);
 });
 
-Route::apiResource('/genre',GenreController::class);
-Route::apiResource('/movie',MovieController::class);
-Route::apiResource('/theater',TheaterController::class);
-Route::apiResource('/beverage',BeverageController::class);
-Route::apiResource('/beverage-type',BeverageTypeController::class);
+Route::apiResource('/genres',GenreController::class);
+Route::apiResource('/movies',MovieController::class);
+Route::apiResource('/theaters',TheaterController::class);
+Route::apiResource('/beverages',BeverageController::class);
+Route::apiResource('/beverage-types',BeverageTypeController::class);
 
 Route::get('/debug', function(){
     //debug your code here
