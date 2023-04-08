@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Beverage\BeverageController;
 use App\Http\Controllers\BeverageType\BeverageTypeController;
+use App\Http\Controllers\Companies\ProductionCompaniesController;
 use App\Http\Controllers\Genre\GenreController;
 use App\Http\Controllers\Movie\MovieController;
 use App\Http\Controllers\Movie\MovieTrashController;
@@ -67,6 +68,7 @@ Route::prefix('movies/trashed')->group(function(){
     Route::get('/delete',[MovieTrashController::class,'forceDeleteAllTrash']);
 });
 
+Route::get('/production-companies',[ProductionCompaniesController::class,'index']);
 Route::apiResource('/genres',GenreController::class);
 Route::apiResource('/movies',MovieController::class);
 Route::apiResource('/theaters',TheaterController::class);
