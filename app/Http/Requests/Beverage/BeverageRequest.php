@@ -27,7 +27,8 @@ class BeverageRequest extends FormRequest
             'title' => ['required','string'],
             'description' => ['required','string'],
             'price' => ['required','numeric','decimal:0,2'],
-            'beverage_type_id' => ['required','integer']
+            'beverage_type_id' => ['required','integer'],
+            // 'image' => ['required','string']
         ];
     }
 }
