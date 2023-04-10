@@ -25,7 +25,7 @@ class SchemaSeeder extends Seeder
             [
                 'name' => 'B',
                 'layout_break' => '6,7,13,14',
-                'capacity' => 90,
+                'capacity' => 95,
                 'per_line' => 19
             ],
             [

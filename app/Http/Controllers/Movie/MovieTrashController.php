@@ -29,9 +29,12 @@ class MovieTrashController extends Controller
         abort(404);
     }
     
-    public function forceDelete($id){
+    public function forceDeleteMovie($id){
         $movie = Movie::onlyTrashed()->find($id);
         if($movie){
+
+            $this->killRelationships($movie);
+
             $movie->forceDelete();
             return response()->json([
                 'status' => true,
@@ -39,5 +42,44 @@ class MovieTrashController extends Controller
             ]);
         }
         abort(404);
+    }
+
+    public function restoreAllTrash(){
+        $trashed_movies = Movie::onlyTrashed()->restore();
+        if($trashed_movies == 0){
+            return response()->json([
+                'status' => false,
+                'message' => 'There is no available trash'
+            ]);
+        }
+        return response()->json([
+            'status' => true,
+            'message' => 'All Movies has been restored successfully'
+        ]);
+    }
+
+    public function forceDeleteAllTrash(){
+        if(!Movie::onlyTrashed()->count()){
+            return response()->json([
+                'status' => false,
+                'message' => 'There is no available trash'
+            ]);
+        };
+        $trashed_movies = Movie::onlyTrashed()->get();
+        foreach ($trashed_movies as $movie) {
+            $this->killRelationships($movie);
+            $movie->forceDelete();
+        }
+        return response()->json([
+            'status' => true,
+            'message' => 'All trash has been deleted permanently'
+        ]);
+    }
+
+    public function killRelationships(Movie $movie){
+        $movie->genres()->detach();
+        $movie->productionCompanies()->detach();
+        $movie->images()->delete();
+        $movie->users()->detach();
     }
 }
