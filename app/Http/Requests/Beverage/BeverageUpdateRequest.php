@@ -4,7 +4,7 @@ namespace App\Http\Requests\Beverage;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BeverageRequest extends FormRequest
+class BeverageUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,11 @@ class BeverageRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required','string'],
-            'description' => ['required','string'],
-            'price' => ['required','numeric','decimal:0,2'],
-            'beverage_type_id' => ['required','integer'],
-            'image' => ['required','string']
+            'title' => ['sometimes','required','string'],
+            'description' => ['sometimes','required','string'],
+            'price' => ['sometimes','required','numeric','decimal:0,2'],
+            'beverage_type_id' => ['sometimes','required','integer'],
+            'image' => ['sometimes']
         ];
     }
 }
