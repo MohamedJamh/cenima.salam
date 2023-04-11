@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Movie;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Image\ImageController;
 use App\Http\Requests\Movie\StoreMovieRequest;
 use App\Http\Requests\Movie\UpdateMovieRequest;
 use App\Http\Resources\Movie\MovieCollection;
@@ -40,19 +41,21 @@ class MovieController extends Controller
                 'status',
             ])
         );
-        $images = [
-            new Image([
-                'url' => $request->input('poster_img'),
-                'type' => 'poster'
-            ]),
-            new Image([
-                'url' => $request->input('backdrop_img'),
-                'type' => 'backdrop'
-            ])
-        ];
+
+        foreach ($request->input('images') as $image ) {
+            $pathOrUrl = $image['url'];
+            if(!filter_var($image['url'],FILTER_VALIDATE_URL)){
+                $pathOrUrl = (new ImageController)->store($image['url'],'movies/');
+            }
+            $movie->images()->saveMany([
+                new Image ([
+                    'type' => $image['type'],
+                    'url' => $pathOrUrl
+                ])
+            ]);
+        }
         $movie->genres()->attach($request->input('genres'));
         $movie->productionCompanies()->attach($request->input('production_companies'));
-        $movie->images()->saveMany($images);
 
         return response()->json([
             'status' => true,

@@ -35,9 +35,8 @@ class StoreMovieRequest extends FormRequest
             'rate' => ['required','numeric','decimal:1'],
             'status' => ['required',Rule::in(['popular', 'premier','upcoming'])],
             'genres' => ['required'],
-            'production_companies' => ['required'],
-            'backdrop_img' => ['required'] ,
-            'poster_img' => ['required']
+            'production_companies' => ['required','array'],
+            'images' => ['required']
         ];
     }
 }
