@@ -37,7 +37,7 @@ class BeverageController extends Controller
 
         $beverage->image()->create([
             'type' => 'poster',
-            'url' => (new ImageController)->store($request->input('image'),'beverages/')
+            'url' => (new ImageController)->store($request->input('image'),'poster','beverages/')
         ]);
         return response()->json([
             'status' => true,
@@ -60,7 +60,7 @@ class BeverageController extends Controller
 
             $beverage->image()->create([
                 'type' => 'poster',
-                'url' => (new ImageController)->store($request->input('image'),'beverages/')
+                'url' => (new ImageController)->store($request->input('image'),'poster','beverages/')
             ]);
         }
         return response()->json([

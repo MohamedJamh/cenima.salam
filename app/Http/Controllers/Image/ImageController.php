@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
-    public function store($imageData , $path){
+    public function store($imageData , $type , $path){
         $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
-        $filename = time() . '.jpg';
+        $filename = $type . time() . '.jpg';
         $imageDirectory = storage_path('app/public/images/'. $path . $filename);
         file_put_contents($imageDirectory, $image);
         
