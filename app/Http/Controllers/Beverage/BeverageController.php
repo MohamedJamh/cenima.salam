@@ -73,7 +73,7 @@ class BeverageController extends Controller
     public function destroy(Beverage $beverage)
     {
         $oldPoster = $beverage->image;
-        (new ImageController)->destory($oldPoster->id,substr($oldPoster->url,32));
+        (new ImageController)->destory($oldPoster,substr($oldPoster->url,32));
 
         $beverage->delete();
         return response()->json([

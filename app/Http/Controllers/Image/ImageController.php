@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
-    //
     public function store($imageData , $path){
         $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
         $filename = time() . '.jpg';
@@ -19,8 +18,8 @@ class ImageController extends Controller
         return 'http://cenima.salam.test/storage/images/'. $path . $filename ;
     }
 
-    public function destory($imageId,$imageUrl){
+    public function destory($image , $imageUrl){
         Storage::disk('public')->delete($imageUrl);
-        Image::find($imageId)->delete();
+        $image->delete();
     }
 }
