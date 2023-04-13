@@ -37,6 +37,7 @@ class MovieResource extends JsonResource
                     'type' => $image->type
                 ];
             }),
+            'deleted_at' => $this->deleted_at
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Movie\MovieController;
 use App\Http\Controllers\Movie\MovieTrashController;
 use App\Http\Controllers\Rank\RankController;
 use App\Http\Controllers\Schema\SchemaController;
+use App\Http\Controllers\Showtime\ShowtimeController;
 use App\Http\Controllers\Theater\TheaterController;
 use App\Models\Genre;
 use App\Models\Image;
@@ -63,14 +64,15 @@ Route::controller(SchemaController::class)->group(function(){
 Route::prefix('movies/trashed')->group(function(){
     Route::get('',[MovieTrashController::class,'trash']);
     Route::get('/{movie}/restore',[MovieTrashController::class,'restoreMovie']);
-    Route::get('/{movie}/delete',[MovieTrashController::class,'forceDeleteMovie']);
+    Route::delete('/{movie}/delete',[MovieTrashController::class,'forceDeleteMovie']);
     Route::get('/restore',[MovieTrashController::class,'restoreAllTrash']);
-    Route::get('/delete',[MovieTrashController::class,'forceDeleteAllTrash']);
+    Route::delete('/delete',[MovieTrashController::class,'forceDeleteAllTrash']);
 });
 
 Route::get('/production-companies',[ProductionCompaniesController::class,'index']);
 Route::apiResource('/genres',GenreController::class);
 Route::apiResource('/movies',MovieController::class);
+Route::apiResource('/showtimes',ShowtimeController::class);
 Route::apiResource('/theaters',TheaterController::class);
 Route::apiResource('/beverages',BeverageController::class);
 Route::apiResource('/beverage-types',BeverageTypeController::class);

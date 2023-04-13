@@ -18,8 +18,7 @@ class ImageController extends Controller
         return 'http://cenima.salam.test/storage/images/'. $path . $filename ;
     }
 
-    public function destory($image , $imageUrl){
+    public function destory($imageUrl){
         Storage::disk('public')->delete($imageUrl);
-        $image->delete();
     }
 }

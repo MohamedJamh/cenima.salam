@@ -14,7 +14,7 @@ class TheaterController extends Controller
 {
     public function index()
     {
-        $theaters = Theater::with('schema')->get();
+        $theaters = Theater::with('schema','showtimes')->get();
         return response()->json([
             'status' => true,
             'result' => new TheaterCollection($theaters)

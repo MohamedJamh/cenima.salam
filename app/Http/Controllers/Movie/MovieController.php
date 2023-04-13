@@ -74,28 +74,23 @@ class MovieController extends Controller
     
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
-        // $this->authorize('update',$movie);
+        $this->authorize('update',$movie);
 
         if($request->has('images')){
             foreach ($request->input('images') as $image ) {
-                if($image['url'] != null ){
-                    // deleting the image
-                    $oldImage = $movie->images->where('type',$image['type']);
-                    return response()->json([
-                        'status' => true,
-                        'result' => $oldImage
-                    ]);
-                    (new ImageController)->destory($oldImage,substr($oldImage->first()->url,32));
-                    //adding the new image
-                    $pathOrUrl = $image['url'];
-                    if(!filter_var($image['url'],FILTER_VALIDATE_URL)){
-                        $pathOrUrl = (new ImageController)->store($image['url'] , $image['type'] , 'movies/');
-                    }
-                    $movie->images()->create([
-                        'type' => $image['type'],
-                        'url' => $pathOrUrl
-                    ]);
+                // deleting the image
+                $oldImage = $movie->images->where('type',$image['type']);
+                (new ImageController)->destory(substr($oldImage->first()->url,32));
+                $oldImage->first()->delete();
+                //adding the new image
+                $pathOrUrl = $image['url'];
+                if(!filter_var($image['url'],FILTER_VALIDATE_URL)){
+                    $pathOrUrl = (new ImageController)->store($image['url'] , $image['type'] , 'movies/');
                 }
+                $movie->images()->create([
+                    'type' => $image['type'],
+                    'url' => $pathOrUrl
+                ]);
             }
         }
 
