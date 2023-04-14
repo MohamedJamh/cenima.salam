@@ -2,92 +2,91 @@
 
 namespace App\Policies;
 
+use App\Models\Movie;
 use App\Models\Showtime;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 
 class ShowtimePolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
+    
+
     public function viewAny(User $user)
     {
         //
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Showtime  $showtime
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
+    
+
     public function view(User $user, Showtime $showtime)
     {
         //
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(?User $user)
+    
+
+    // public function create(User $user, Request $request , Carbon $newStarts , Carbon $newEnds)
+    public function create(User $user, $date ,$theater_id, Carbon $newStarts , Carbon $newEnds)
     {
-        if(5 == 5) return true;
-        return false;
+
+        $showtimeDate = $date;
+        $showtimeTheaterId = $theater_id;
+
+        $existingShowtimes = Showtime::where('date',$showtimeDate)
+        ->where('theater_id',$showtimeTheaterId)
+        ->orderBy('starts')
+        ->get();
+        
+        if(count($existingShowtimes)){
+            foreach ($existingShowtimes as $existingShowtime) {
+                $oldStarts = Carbon::createFromTimeString($existingShowtime->starts)->subMinutes(9);
+                $oldEnds = Carbon::createFromTimeString($existingShowtime->ends)->addMinutes(9);
+
+                if($newEnds->lessThan($oldStarts) || $oldEnds->lessThan($newStarts)){
+                    continue;
+                }else{
+                    throw new HttpResponseException(response()->json([
+                        'status' => false,
+                        'message' => 'Invalid Starting Time, Your movies ends at '
+                        . $newEnds->toTimeString() .' , another movie is on '
+                        . $oldStarts->toTimeString() . ' to ' . $oldEnds->toTimeString()
+                        . ' (Cleaning Breaks included)'
+                    ]));
+                }
+            }
+        }
+        return true;
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Showtime  $showtime
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
+    
+
     public function update(User $user, Showtime $showtime)
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Showtime  $showtime
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
+    
+
     public function delete(User $user, Showtime $showtime)
     {
         //
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Showtime  $showtime
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
+    
+
+
     public function restore(User $user, Showtime $showtime)
     {
         //
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Showtime  $showtime
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
+    
+
     public function forceDelete(User $user, Showtime $showtime)
     {
         //
