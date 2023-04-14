@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Movie;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Image\ImageController;
 use App\Http\Requests\Movie\StoreMovieRequest;
 use App\Http\Requests\Movie\UpdateMovieRequest;
 use App\Http\Resources\Movie\MovieCollection;
@@ -40,19 +41,19 @@ class MovieController extends Controller
                 'status',
             ])
         );
-        $images = [
-            new Image([
-                'url' => $request->input('poster_img'),
-                'type' => 'poster'
-            ]),
-            new Image([
-                'url' => $request->input('backdrop_img'),
-                'type' => 'backdrop'
-            ])
-        ];
+
+        foreach ($request->input('images') as $image ) {
+            $pathOrUrl = $image['url'];
+            if(!filter_var($image['url'],FILTER_VALIDATE_URL)){
+                $pathOrUrl = (new ImageController)->store($image['url'] , $image['type'] , 'movies/');
+            }
+            $movie->images()->create([
+                'type' => $image['type'],
+                'url' => $pathOrUrl
+            ]);
+        }
         $movie->genres()->attach($request->input('genres'));
         $movie->productionCompanies()->attach($request->input('production_companies'));
-        $movie->images()->saveMany($images);
 
         return response()->json([
             'status' => true,
@@ -69,13 +70,46 @@ class MovieController extends Controller
             'result' => new MovieResource(Movie::find($movie->id))
         ]);
     }
-
+  
     
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
         $this->authorize('update',$movie);
 
-        $movie->update($request->all());
+        if($request->has('images')){
+            foreach ($request->input('images') as $image ) {
+                // deleting the image
+                $oldImage = $movie->images->where('type',$image['type']);
+                (new ImageController)->destory(substr($oldImage->first()->url,32));
+                $oldImage->first()->delete();
+                //adding the new image
+                $pathOrUrl = $image['url'];
+                if(!filter_var($image['url'],FILTER_VALIDATE_URL)){
+                    $pathOrUrl = (new ImageController)->store($image['url'] , $image['type'] , 'movies/');
+                }
+                $movie->images()->create([
+                    'type' => $image['type'],
+                    'url' => $pathOrUrl
+                ]);
+            }
+        }
+
+        $movie->update(
+            $request->only([
+                'title',
+                'budget',
+                'tagline',
+                'language',
+                'overview',
+                'release_date',
+                'runtime',
+                'rate',
+                'status',
+            ])
+        );
+        $movie->genres()->sync($request->input('genres'));
+        $movie->productionCompanies()->sync($request->input('production_companies'));
+
         return response()->json([
             'status' => true,
             'message' => 'Movie details has been updated successfully',

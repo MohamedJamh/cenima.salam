@@ -25,19 +25,18 @@ class StoreMovieRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required','string','unique:movies,title'],
-            'tagline' => ['required','string'],
-            'budget' => ['sometimes','required','numeric','decimal:0,2'],
-            'language' => ['required','string'],
-            'overview' => ['required','string'],
-            'release_date' => ['required','date'],
-            'runtime' => ['required','integer'],
-            'rate' => ['required','numeric','decimal:1'],
-            'status' => ['required',Rule::in(['popular', 'premier','upcoming'])],
-            'genres' => ['required'],
-            'production_companies' => ['required'],
-            'backdrop_img' => ['required'] ,
-            'poster_img' => ['required']
+            // 'title' => ['required','string','unique:movies,title'],
+            // 'tagline' => ['required','string'],
+            // 'budget' => ['sometimes','required','numeric','decimal:0,2'],
+            // 'language' => ['required','string'],
+            // 'overview' => ['required','string'],
+            // 'release_date' => ['required','date'],
+            // 'runtime' => ['required','integer'],
+            // 'rate' => ['required','numeric','decimal:1'],
+            // 'status' => ['required',Rule::in(['popular', 'premier','upcoming'])],
+            // 'genres' => ['required'],
+            // 'production_companies' => ['required','array'],
+            // 'images' => ['required']
         ];
     }
 }

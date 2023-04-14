@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Beverage;
+namespace App\Http\Requests\Showtime;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BeverageRequest extends FormRequest
+class StoreShowtimeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,10 @@ class BeverageRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required','string'],
-            'description' => ['required','string'],
-            'price' => ['required','numeric','decimal:0,2'],
-            'beverage_type_id' => ['required','integer'],
-            'image' => ['required','string']
+            'date' => ['required','date','after_or_equal:today'],
+            'starts' => ['required','date_format:H:i:s'],
+            'movie_id' => ['required','exists:movies,id'],
+            'theater_id' => ['required','exists:theaters,id'],
         ];
     }
 }

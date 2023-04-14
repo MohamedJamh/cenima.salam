@@ -5,9 +5,11 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 use App\Models\Genre;
 use App\Models\Movie;
+use App\Models\Showtime;
 use App\Models\Theater;
 use App\Policies\GenrePolicy;
 use App\Policies\MoviePolicy;
+use App\Policies\ShowtimePolicy;
 use App\Policies\TheaterPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Theater::class => TheaterPolicy::class,
         Genre::class => GenrePolicy::class,
         Movie::class => MoviePolicy::class,
+        Showtime::class => ShowtimePolicy::class,
     ];
 
     /**

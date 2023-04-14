@@ -20,8 +20,18 @@ class BeverageResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'type' => $this->whenLoaded('beverageType', function () {
-                return $this->beverageType->name;
+                return [
+                    'id' => $this->beverageType->id,
+                    'name' => $this->beverageType->name,
+                ];
+            }),
+            'image' => $this->whenLoaded('image', function () {
+                return [
+                    'type' => $this->image->type,
+                    'url' => $this->image->url,
+                ];
             })
+            
         ];
     }
 }

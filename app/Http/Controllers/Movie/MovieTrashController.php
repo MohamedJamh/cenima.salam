@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Movie;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Image\ImageController;
 use App\Http\Resources\Movie\MovieCollection;
 use App\Http\Resources\Movie\MovieResource;
 use App\Models\Movie;
@@ -31,17 +32,35 @@ class MovieTrashController extends Controller
     
     public function forceDeleteMovie($id){
         $movie = Movie::onlyTrashed()->find($id);
+        // return response()->json([
+        //     'status' => true,
+        //     'message' => '9bel',
+        //     'result' => $movie
+        // ]);
         if($movie){
 
-            $this->killRelationships($movie);
-
-            $movie->forceDelete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Movie has been deleted permanently'
-            ]);
+            // $this->killRelationships($movie);
+            
+            foreach ($movie->images()->get() as $image) {
+                if(str_contains($image->url,'cenima.salam')){
+                    (new ImageController)->destory(substr($image->url,32));
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'dakhl if',
+                        'result' => $image->url
+                    ]);
+                }
+                // $image->delete();
+            }
+            
+            // $movie->forceDelete();
+            // return response()->json([
+            //     'status' => true,
+            //     'message' => 'Movie has been deleted permanently'
+            // ]);
         }
         abort(404);
+        
     }
 
     public function restoreAllTrash(){
@@ -68,6 +87,12 @@ class MovieTrashController extends Controller
         $trashed_movies = Movie::onlyTrashed()->get();
         foreach ($trashed_movies as $movie) {
             $this->killRelationships($movie);
+            foreach ($movie->images()->get() as $image) {
+                if(str_contains($image->url,'cenima.salam')){
+                    (new ImageController)->destory(substr($image->url,32));
+                }
+                $image->delete();
+            }
             $movie->forceDelete();
         }
         return response()->json([

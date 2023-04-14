@@ -19,8 +19,18 @@ class ShowtimeResource extends JsonResource
             'date' => $this->date,
             'starts' => $this->starts,
             'ends' => $this->ends,
-            'movieId' => $this->movie_id,
-            'theaterId' => $this->theater_id
+            'movie' => $this->whenLoaded('movie',function(){
+                return [
+                    'movie_id' => $this->movie->id,
+                    'title' => $this->movie->title,
+                ];
+            }),
+            'theater' => $this->whenLoaded('theater',function(){
+                return [
+                    'theater_id' => $this->theater->id,
+                    'name' => $this->theater->name,
+                ];
+            }),
         ];
     }
 }

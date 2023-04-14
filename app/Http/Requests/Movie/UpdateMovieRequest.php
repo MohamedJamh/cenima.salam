@@ -25,7 +25,7 @@ class UpdateMovieRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['sometimes','required','string','unique:movies,title'],
+            'title' => ['sometimes','required','string'],
             'tagline' => ['sometimes','required','string'],
             'budget' => ['sometimes','required','numeric','decimal:0,2'],
             'language' => ['sometimes','required','string'],
@@ -36,8 +36,7 @@ class UpdateMovieRequest extends FormRequest
             'status' => ['sometimes','required',Rule::in(['popular', 'premier','upcoming'])],
             'genres' => ['sometimes','required'],
             'production_companies' => ['sometimes','required'],
-            'backdrop_img' => ['sometimes','required'] ,
-            'poster_img' => ['sometimes','required']
+            'images' => ['sometimes','required'] ,
         ];
     }
 }
