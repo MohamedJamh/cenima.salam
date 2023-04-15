@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources\Showtime;
 
+use App\Http\Resources\Genre\GenreCollection;
+use App\Http\Resources\Movie\MovieCollection;
+use App\Http\Resources\Movie\MovieResource;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,16 +18,14 @@ class ShowtimeResource extends JsonResource
      */
     public function toArray($request)
     {
+        
         return [
             'id' => $this->id,
-            'date' => $this->date,
+            'date' => Carbon::createFromFormat('Y-m-d',$this->date)->format('D F Y'),
             'starts' => Carbon::createFromTimeString($this->starts)->format('g:i A'),
             'ends' => Carbon::createFromTimeString($this->ends)->format('g:i A'),
             'movie' => $this->whenLoaded('movie',function(){
-                return [
-                    'movie_id' => $this->movie->id,
-                    'title' => $this->movie->title,
-                ];
+                return new MovieResource($this->movie);
             }),
             'theater' => $this->whenLoaded('theater',function(){
                 return [

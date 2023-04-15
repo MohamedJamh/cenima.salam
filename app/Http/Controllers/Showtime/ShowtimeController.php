@@ -83,7 +83,6 @@ class ShowtimeController extends Controller
             $newStarts,
             $newEnds
         ]);
-
         $showtime->update($request->all());
         return response()->json([
             'status' => true,

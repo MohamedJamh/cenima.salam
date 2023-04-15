@@ -55,7 +55,7 @@ class ShowtimePolicy
                         'message' => 'Invalid Starting Time, Your movies ends at '
                         . $newEnds->toTimeString() .' , another movie is on '
                         . $oldStarts->toTimeString() . ' to ' . $oldEnds->toTimeString()
-                        . ' (Cleaning Breaks included)'
+                        . '(Cleaning Breaks included)'
                     ]));
                 }
             }
