@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Showtime;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShowtimeResource extends JsonResource
@@ -17,8 +18,8 @@ class ShowtimeResource extends JsonResource
         return [
             'id' => $this->id,
             'date' => $this->date,
-            'starts' => $this->starts,
-            'ends' => $this->ends,
+            'starts' => Carbon::createFromTimeString($this->starts)->format('g:i A'),
+            'ends' => Carbon::createFromTimeString($this->ends)->format('g:i A'),
             'movie' => $this->whenLoaded('movie',function(){
                 return [
                     'movie_id' => $this->movie->id,

@@ -17,7 +17,9 @@ class ShowtimeController extends Controller
     
     public function index()
     {
-        $showtimes = Showtime::with('movie','theater')->get();
+        $showtimes = Showtime::with('movie','theater')
+        ->where('date', '>=' , now()->toDateString())
+        ->get();
         return response()->json([
             'status' => true,
             'result' => new ShowtimeCollection($showtimes)
@@ -41,6 +43,9 @@ class ShowtimeController extends Controller
             $newEnds
         ]);
 
+        $movie->update([
+            'status' => 'premier'
+        ]);
         $showtime = Showtime::create([
             'date' => $request->input('date'),
             'starts' => $newStarts->toTimeString(),

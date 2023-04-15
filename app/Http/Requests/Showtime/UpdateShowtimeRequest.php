@@ -25,7 +25,7 @@ class UpdateShowtimeRequest extends FormRequest
     {
         return [
             'date' => ['sometimes','required','date','after_or_equal:today'],
-            'starts' => ['sometimes','required','date_format:H:i:s'],
+            'starts' => ['sometimes','required','date_format:H:i'],
             'theater_id' => ['sometimes','required','exists:theaters,id'],
         ];
     }
