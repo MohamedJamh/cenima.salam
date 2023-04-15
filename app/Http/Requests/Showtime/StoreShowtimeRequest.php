@@ -25,7 +25,7 @@ class StoreShowtimeRequest extends FormRequest
     {
         return [
             'date' => ['required','date','after_or_equal:today'],
-            'starts' => ['required','date_format:H:i:s'],
+            'starts' => ['required','date_format:H:i'],
             'movie_id' => ['required','exists:movies,id'],
             'theater_id' => ['required','exists:theaters,id'],
         ];
