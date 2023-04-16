@@ -38,7 +38,7 @@ class TheaterController extends Controller
     {
         return response()->json([
             'status' => true,
-            'result' => new TheaterResource(Theater::with('showtimes')->find($theater->id))
+            'result' => new TheaterResource($theater->load('schema'))
         ]);
     }
 
