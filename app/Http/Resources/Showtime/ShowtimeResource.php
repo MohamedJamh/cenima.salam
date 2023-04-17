@@ -33,6 +33,9 @@ class ShowtimeResource extends JsonResource
                     'name' => $this->theater->name,
                 ];
             }),
+            'tickets' => $this->whenLoaded('tickets',function(){
+                return array_column($this->tickets->toArray(),'seats') ;
+            })
         ];
     }
 }

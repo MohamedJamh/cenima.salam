@@ -56,15 +56,18 @@ class ShowtimeController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Showtime has been added successfuly',
-            'result' => new ShowtimeResource($showtime)
+            'result' => new ShowtimeResource($showtime->with('movie','theater')->first())
         ]);
     }
 
     
 
-    public function show($id)
+    public function show(Showtime $showtime)
     {
-        //
+        return response()->json([
+            'status' => true,
+            'result' => new ShowtimeResource($showtime->load('movie','theater','tickets'))
+        ]);
     }
     
 

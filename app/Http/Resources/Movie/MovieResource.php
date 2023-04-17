@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Movie;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MovieResource extends JsonResource
@@ -14,6 +15,9 @@ class MovieResource extends JsonResource
      */
     public function toArray($request)
     {
+        $duration = Carbon::now()->addMinutes($this->runtime);
+        $hours = $duration->diffInHours();
+        $minutes = $duration->diffInMinutes() % 60;
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -22,7 +26,7 @@ class MovieResource extends JsonResource
             'language' => $this->language,
             'overview' => $this->overview,
             'release_date' => $this->release_date,
-            'runtime' => $this->runtime,
+            'runtime' => $hours . ' hours ' . $minutes . ' minutes',
             'rate' => $this->rate,
             'status' => $this->status,
             'genres' => $this->genres->map(function ($genre) {
