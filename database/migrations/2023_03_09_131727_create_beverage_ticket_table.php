@@ -17,8 +17,6 @@ return new class extends Migration
             $table->primary(['beverage_id','ticket_id']);
             $table->foreignId('beverage_id')->constrained();
             $table->foreignId('ticket_id')->constrained();
-            $table->integer('quantity');
-            $table->float('amount',5,2);
             $table->timestamps();
         });
     }

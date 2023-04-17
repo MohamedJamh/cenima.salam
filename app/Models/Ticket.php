@@ -10,7 +10,9 @@ class Ticket extends Model
     use HasFactory;
     protected $fillable = [
         'seats',
-        'price'
+        'price',
+        'user_id',
+        'showtime_id'
     ];
 
     public function showtime(){

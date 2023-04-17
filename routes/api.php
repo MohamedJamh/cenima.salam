@@ -10,6 +10,7 @@ use App\Http\Controllers\Rank\RankController;
 use App\Http\Controllers\Schema\SchemaController;
 use App\Http\Controllers\Showtime\ShowtimeController;
 use App\Http\Controllers\Theater\TheaterController;
+use App\Http\Controllers\Ticket\TicketController;
 use App\Models\Genre;
 use App\Models\Image;
 use App\Models\Movie;
@@ -73,6 +74,7 @@ Route::get('/production-companies',[ProductionCompaniesController::class,'index'
 Route::apiResource('/genres',GenreController::class);
 Route::apiResource('/movies',MovieController::class);
 Route::apiResource('/showtimes',ShowtimeController::class);
+Route::apiResource('/tickets',TicketController::class);
 Route::apiResource('/theaters',TheaterController::class);
 Route::apiResource('/beverages',BeverageController::class);
 Route::apiResource('/beverage-types',BeverageTypeController::class);
