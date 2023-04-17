@@ -56,8 +56,9 @@ class BeverageController extends Controller
         
         if($request->has('image')){
             $oldPoster = $beverage->image;
-            (new ImageController)->destory($oldPoster->id,substr($oldPoster->url,32));
-
+            (new ImageController)->destory(substr($oldPoster->url,32));
+            $oldPoster->delete();
+            
             $beverage->image()->create([
                 'type' => 'poster',
                 'url' => (new ImageController)->store($request->input('image'),'poster','beverages/')
@@ -73,8 +74,8 @@ class BeverageController extends Controller
     public function destroy(Beverage $beverage)
     {
         $oldPoster = $beverage->image;
-        (new ImageController)->destory($oldPoster,substr($oldPoster->url,32));
-
+        (new ImageController)->destory(substr($oldPoster->url,32));
+        $oldPoster->delete();
         $beverage->delete();
         return response()->json([
             'status' => true,
