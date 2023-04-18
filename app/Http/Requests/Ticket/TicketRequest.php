@@ -28,7 +28,7 @@ class TicketRequest extends FormRequest
             'price' => ['required'],
             'user_id' => ['required'],
             'showtime_id' => ['required'],
-            'beverage' => ['sometimes','required']
+            'beverages' => ['sometimes','required']
         ];
     }
 }

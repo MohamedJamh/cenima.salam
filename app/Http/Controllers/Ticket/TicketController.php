@@ -32,7 +32,7 @@ class TicketController extends Controller
             'user_id',
             'showtime_id'
         ]));
-        if(!$request->input('beverages')) $ticket->beverages()->attach($request->input('beverages'));
+        if($request->has('beverages')) $ticket->beverages()->attach($request->input('beverages'));
         return response()->json([
             'status' => true,
             'message' => 'Your ticket has been reserved successfully',
