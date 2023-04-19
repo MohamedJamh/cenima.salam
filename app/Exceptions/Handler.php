@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'status' => false,
                     'message' => 'Record not found.'
-                ], 404);
+                ]);
             }
         });
     }

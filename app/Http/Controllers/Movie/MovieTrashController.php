@@ -31,33 +31,24 @@ class MovieTrashController extends Controller
     }
     
     public function forceDeleteMovie($id){
+        
         $movie = Movie::onlyTrashed()->find($id);
-        // return response()->json([
-        //     'status' => true,
-        //     'message' => '9bel',
-        //     'result' => $movie
-        // ]);
-        if($movie){
 
-            // $this->killRelationships($movie);
+        if($movie){
+            $this->killRelationships($movie);
             
             foreach ($movie->images()->get() as $image) {
                 if(str_contains($image->url,'cenima.salam')){
                     (new ImageController)->destory(substr($image->url,32));
-                    return response()->json([
-                        'status' => true,
-                        'message' => 'dakhl if',
-                        'result' => $image->url
-                    ]);
                 }
-                // $image->delete();
+                $image->delete();
             }
             
-            // $movie->forceDelete();
-            // return response()->json([
-            //     'status' => true,
-            //     'message' => 'Movie has been deleted permanently'
-            // ]);
+            $movie->forceDelete();
+            return response()->json([
+                'status' => true,
+                'message' => 'Movie has been deleted permanently'
+            ]);
         }
         abort(404);
         
