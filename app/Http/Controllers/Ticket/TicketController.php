@@ -15,7 +15,7 @@ class TicketController extends Controller
 
     public function index()
     {
-        $tickets = Ticket::with('user','beverages')->get();
+        $tickets = Ticket::with('user','beverages','showtime')->get();
         return response()->json([
             'status' => true,
             'result' => new TicketCollection($tickets)
@@ -36,15 +36,19 @@ class TicketController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Your ticket has been reserved successfully',
-            'result' => new TicketResource($ticket)
+            'result' => new TicketResource($ticket->load('user','beverages','showtime'))
         ]);
     }
 
     
 
-    public function show($id)
+    public function show(Ticket $ticket)
     {
-        //
+        return response()->json([
+            'status' => true,
+            'message' => 'Your ticket has been reserved successfully',
+            'result' => new TicketResource($ticket->load('beverages'))
+        ]);
     }
 
     

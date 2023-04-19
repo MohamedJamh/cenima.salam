@@ -62,12 +62,14 @@ Route::controller(SchemaController::class)->group(function(){
     });
 });
 
-Route::prefix('movies/trashed')->group(function(){
-    Route::get('',[MovieTrashController::class,'trash']);
-    Route::get('/{movie}/restore',[MovieTrashController::class,'restoreMovie']);
-    Route::delete('/{movie}/delete',[MovieTrashController::class,'forceDeleteMovie']);
-    Route::get('/restore',[MovieTrashController::class,'restoreAllTrash']);
-    Route::delete('/delete',[MovieTrashController::class,'forceDeleteAllTrash']);
+Route::controller(MovieTrashController::class)->group(function(){
+    Route::prefix('movies/trashed')->group(function(){
+        Route::get('','trash');
+        Route::get('/{movie}/restore','restoreMovie');
+        Route::delete('/{movie}/delete','forceDeleteMovie');
+        Route::get('/restore','restoreAllTrash');
+        Route::delete('/delete','forceDeleteAllTrash');
+    });
 });
 
 Route::get('/production-companies',[ProductionCompaniesController::class,'index']);
