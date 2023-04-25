@@ -15,19 +15,14 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = [
+        return [
             "id" => $this->id,
             "name" => $this->name,
             "email" => $this->email,
+            "roles" => $this->whenLoaded('roles',function(){
+                return array_column($this->roles->toArray(),'name');
+            }),
             "createdAt" => date_format($this->created_at, 'Y-m-d H:i:s')
         ];
-        if(Auth::user()->hasRole('admin')){
-            $roles = array();
-            foreach ($this->roles as $role) {
-                array_push($roles,$role->name);
-            }
-            $user['roles'] = $roles;
-        }
-        return $user;
     }
 }
