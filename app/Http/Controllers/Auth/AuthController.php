@@ -58,7 +58,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'User created successfully',
-            // 'user' => new UserResource($user),
+            'user' => new UserResource($user->load('roles')),
             'authorisation' => [
                 'token' => $token,
                 'type' => 'bearer',
