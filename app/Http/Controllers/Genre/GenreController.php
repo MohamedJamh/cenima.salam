@@ -14,7 +14,7 @@ class GenreController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth:api');
+        $this->middleware(['auth','role:admin']);
     }
 
     public function index()

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 class BeverageController extends Controller
 {
     public function __construct(){
-        // auth , verified and admin Middleware
+        $this->middleware(['auth','role:admin']);
     }
     public function index()
     {

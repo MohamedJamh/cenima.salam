@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class ProductionCompaniesController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth','role:admin']);
+    }
     public function index(){
         $companies = ProductionCompany::all();
         return response()->json([

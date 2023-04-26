@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 
 class SchemaController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth','role:admin']);
+    }
     public function index(){
         $schemas = Schema::all();
         return response()->json([

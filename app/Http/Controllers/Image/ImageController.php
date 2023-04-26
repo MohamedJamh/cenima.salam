@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth','role:admin']);
+    }
     public function store($imageData , $type , $path){
         $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
         $filename = $type . time() . '.jpg';
