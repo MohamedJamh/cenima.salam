@@ -12,8 +12,10 @@ use Illuminate\Http\Request;
 
 class TheaterController extends Controller
 {
-    public function __construct(){
-        $this->middleware(['auth','role:admin']);
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+        $this->middleware(['role:admin'])->except('show');
     }
     public function index()
     {
