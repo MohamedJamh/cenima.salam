@@ -11,7 +11,10 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    
+    public function __construct(){
+        $this->middleware(['auth:api']);
+        $this->middleware(['role:admin'])->only('index');
+    }
 
     public function index()
     {
@@ -21,7 +24,6 @@ class TicketController extends Controller
             'result' => new TicketCollection($tickets)
         ]);
     }
-
     
 
     public function store(TicketRequest $request)

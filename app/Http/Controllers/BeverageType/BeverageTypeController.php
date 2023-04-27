@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class BeverageTypeController extends Controller
 {
     public function __construct(){
-
+        $this->middleware(['auth:api','role:admin']);
     }
     public function index()
     {

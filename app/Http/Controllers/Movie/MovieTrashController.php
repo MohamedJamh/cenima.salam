@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 
 class MovieTrashController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth:api','role:admin']);
+    }
     public function trash(){
         $trash_movies = Movie::onlyTrashed()->get();
         return response()->json([
